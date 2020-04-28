@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Created on Tue Apr 28 16:01:08 2020
 
@@ -36,5 +34,4 @@ min_grafo = CrearGrafo(mst(0, grafo))
 print(min_grafo)
 
 lista = [sorted(min_grafo[k]) for k in sorted(min_grafo)]
-#[[10], [6], [7, 11], [10, 11], [7, 9], [7, 12], [1, 8], [2, 4, 5], [6, 12], [4], [0, 3], [2, 3], [5, 8]]
 print(lista)
