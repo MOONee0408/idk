@@ -29,6 +29,37 @@ def mst(inicio, grafo):
     assert len(aristas) == len(grafo)-1
     return aristas
 
+
+#Solo he colocado la información para poder ver como realizarlo, estoy pensando que sea con diccionarios
+#sea más facil de trabajar, o la otra es trabajar con lista de listas. 
+#igual quedaría después de ver mas la estructura del programa
+intereses = ['Cfis','Mec', 'Mat', 
+             'Cbiosa', 'Eco', 'Ssoc', 
+             'Pol', 'Csoc', 'Adm', 'Org', 
+             'ArttVis', 'ExpMus', 'ExpOral','ExpEsc']
+carreras = [['arquitectura'], ['fisica'], ['ingenieria'], ['matematicas'], 
+            ['biologia'], ['medicina'], ['psicologia'],['quimica'],
+            ['administracion'],['comunicacion'],['derecho'], ['trabajo social'],
+            ['diseño grafico'],['historia'],['literatura'],['musica']]
+
+CAreaI = {'arq': {'Mec', 'Mat', 'Org', 'ArttVis'}, 
+          'fis': {'Cfis','Mec', 'Mat'}, 
+          'ing':{'Cfis','Mec', 'Mat'}, 
+          'mat':{'Cfis', 'Mat', 'Org'}}
+CAreaII = {'bio': {'Cfis', 'Cbiosa', 'Eco', 'Org'}, 
+           'med': {'Cfis', 'Mat', 'Cbiosa', 'Ssoc'}, 
+           'psi':{'Cbiosa','Ssoc', 'Csoc', 'Org', 'ExpOral'}, 
+           'quim':{'Mec', 'Mat', 'Cbiosa', 'Eco'}}
+CAreaIII = {'adm': {'Mat', 'Adm', 'Org', }, 
+            'com': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'},
+            'der':{'Ssoc', 'Pol', 'Csoc',  'Org', 'ExpOral','ExpEsc'}, 
+            'trabsoc':{'Eco', 'Ssoc', 'Csoc',  'Org', 'ExpOral','ExpEsc'}}
+CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArttVis', 'ExpEsc'}, 
+           'hist': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'}, 
+           'lit':{'Ssoc', 'ExpOral','ExpEsc'}, 
+           'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
+
+
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
 print(min_grafo)
