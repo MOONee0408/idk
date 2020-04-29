@@ -107,7 +107,13 @@ for clave in CAreaI:
                 print("Sí esta " + str(y) + " en: " +  str(clave))
                 guardado.append(y)
     print(guardado)
+    m = len(guardado)
+    print(m)
+    definitiva.append([m,clave,1])
     
+definitiva.sort(reverse=True)
+for i in definitiva:
+    print(i)
 
 
 
