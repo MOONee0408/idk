@@ -29,6 +29,16 @@ def mst(inicio, grafo):
     assert len(aristas) == len(grafo)-1
     return aristas
 
+    #PARA INGRESAR DATOS DEL ALUMNO:
+def AgregarAlumno():
+    Alum = {}
+    for interes in intereses:
+        print(interes)
+        n = int(input("Ingrese el puntaje para " + interes + ":\t" ))
+        while (n < 0 or n > 100):
+            n = int(input("¡Ingrese un número válido!\t"))
+        Alum[interes] = n
+    return Alum
 
 #Solo he colocado la información para poder ver como realizarlo, estoy pensando que sea con diccionarios
 #sea más facil de trabajar, o la otra es trabajar con lista de listas. 
@@ -59,6 +69,9 @@ CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArttVis', 'ExpEsc'},
            'lit':{'Ssoc', 'ExpOral','ExpEsc'}, 
            'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
 
+
+Alumno = AgregarAlumno()
+#print(Alumno)
 
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
