@@ -40,6 +40,11 @@ def AgregarAlumno():
         Alum[interes] = n
     return Alum
 
+
+def imprimirDict(Dict):
+    for clave in Dict:
+        print("Clave:\t " + str(clave) + "\tValor:\t" + str(Dict[clave]))
+
 #Solo he colocado la información para poder ver como realizarlo, estoy pensando que sea con diccionarios
 #sea más facil de trabajar, o la otra es trabajar con lista de listas. 
 #igual quedaría después de ver mas la estructura del programa
@@ -70,8 +75,13 @@ CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArttVis', 'ExpEsc'},
            'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
 
 
-Alumno = AgregarAlumno()
-#print(Alumno)
+Alum = AgregarAlumno()
+Alumno = {} 
+#Se eliminan todos los valores menores a 45
+for clave in Alum:
+    if Alum[clave] > 45:
+        Alumno[clave] = Alum[clave]
+imprimirDict(Alumno)
 
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
