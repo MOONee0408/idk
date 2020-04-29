@@ -83,6 +83,34 @@ for clave in Alum:
         Alumno[clave] = Alum[clave]
 imprimirDict(Alumno)
 
+
+n = len(Alumno) #Tamaño de nuestro diccionario
+
+lista_Dict = [] #Esta lista guardará todos los pares de nuestro diccionario.
+for clave in Alumno:   
+    lista_Dict.append([Alumno[clave], clave]) #Agrega primero valor y luego clave, ej. [[72, 'Ssoc'],...]
+
+lista_Dict.sort(reverse=True) #Nos organiza la lista de manera descendente, ej. [[72, 'Ssoc],...,[47, 'Adm']]
+#print("lista:"+ str(lista_Dict))
+
+
+#Este ciclo nos busca todas las listas para formar nuestro grafo
+for clave in CAreaI:
+    guardado = []
+    print("\nCarrera:\t")
+    print(clave)
+    print("Intereses:")
+    print(CAreaI[clave])
+    for y in CAreaI[clave]:
+        for i in range(len(lista_Dict)):
+            if y == lista_Dict[i][1]:
+                print("Sí esta " + str(y) + " en: " +  str(clave))
+                guardado.append(y)
+    print(guardado)
+    
+
+
+
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
 print(min_grafo)
