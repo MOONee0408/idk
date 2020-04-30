@@ -11,7 +11,7 @@ def CrearGrafo(lista):
         grafo.setdefault(e2, []).append(e1)
     return grafo
 
-# Prim's
+#función de Prim
 def mst(inicio, grafo):
     visitado = set()
     aristas = []
@@ -77,12 +77,21 @@ CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArttVis', 'ExpEsc'},
 
 Alum = AgregarAlumno()
 Alumno = {} 
-#Se eliminan todos los valores menores a 45
-for clave in Alum:
-    if Alum[clave] > 45:
-        Alumno[clave] = Alum[clave]
-imprimirDict(Alumno)
 
+
+#Elimina todos los valores menores a 45
+Alum = AgregarAlumno()
+Alumno = Alum.copy()
+for clave in Alum:
+    if Alum[clave] < 45:
+        Alumno.pop(clave,None)
+
+#También podemos hacer que se agregen todos los valores mayores a 45
+#for clave in Alum:
+    #if Alum[clave] > 45:
+        #Alumno[clave] = Alum[clave]
+#imprimirDict(Alumno)
+        
 
 n = len(Alumno) #Tamaño de nuestro diccionario
 
@@ -94,6 +103,7 @@ lista_Dict.sort(reverse=True) #Nos organiza la lista de manera descendente, ej. 
 #print("lista:"+ str(lista_Dict))
 
 
+definitiva = [] #En esta lista se guardan las listas que se muestra en la linea 113
 #Este ciclo nos busca todas las listas para formar nuestro grafo
 for clave in CAreaI:
     guardado = []
@@ -109,17 +119,19 @@ for clave in CAreaI:
     print(guardado)
     m = len(guardado)
     print(m)
-    definitiva.append([m,clave,1])
+    definitiva.append([m,clave,1]) #Se guardará el numero de coincidencias, carrera y Area
+    
     
 definitiva.sort(reverse=True)
 for i in definitiva:
     print(i)
 
 
-
+#ESTA PARTE ES APARTE, NOS PRUEBA QUE FUNCIONA LA FUNCIÓN PRIM
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
 print(min_grafo)
 
+#Crea una lista con los datos.
 lista = [sorted(min_grafo[k]) for k in sorted(min_grafo)]
 print(lista)
