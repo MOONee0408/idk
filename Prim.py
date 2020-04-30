@@ -75,13 +75,13 @@ CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArttVis', 'ExpEsc'},
            'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
 
 
-Alum = AgregarAlumno()
-Alumno = {} 
 
+#Alum={'Cfis': 55,'Mec': 54, 'Mat':66, 'Cbiosa':47, 'Eco': 42, 'Ssoc': 36, 'Pol':42 , 'Csoc': 50, 'Adm': 58, 'Org': 42, 'ArtVis': 62, 'ExpMus': 66, 'ExpOral': 49,'ExpEsc': 72}
 
-#Elimina todos los valores menores a 45
 Alum = AgregarAlumno()
 Alumno = Alum.copy()
+
+#Elimina todos los valores menores a 45
 for clave in Alum:
     if Alum[clave] < 45:
         Alumno.pop(clave,None)
@@ -130,7 +130,8 @@ for i in definitiva:
 #ESTA PARTE ES APARTE, NOS PRUEBA QUE FUNCIONA LA FUNCIÓN PRIM
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
-print(min_grafo)
+imprimirDict(min_grafo) 
+#print(min_grafo)
 
 #Crea una lista con los datos.
 lista = [sorted(min_grafo[k]) for k in sorted(min_grafo)]
