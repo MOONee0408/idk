@@ -33,7 +33,7 @@ def mst(inicio, grafo):
 def AgregarAlumno():
     Alum = {}
     for interes in intereses:
-        print(interes)
+        #print(interes)
         n = int(input("Ingrese el puntaje para " + interes + ":\t" ))
         while (n < 0 or n > 100):
             n = int(input("¡Ingrese un número válido!\t"))
@@ -121,12 +121,12 @@ for clave in CAreaI:
     print(m)
     definitiva.append([m,clave,1]) #Se guardará el numero de coincidencias, carrera y Area
     
-    
+print("\n")    
 definitiva.sort(reverse=True)
 for i in definitiva:
     print(i)
 
-
+print("\n\n")
 #ESTA PARTE ES APARTE, NOS PRUEBA QUE FUNCIONA LA FUNCIÓN PRIM
 grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
 min_grafo = CrearGrafo(mst(0, grafo))
