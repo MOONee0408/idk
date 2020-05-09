@@ -121,10 +121,43 @@ for clave in CAreaI:
     print(m)
     definitiva.append([m,clave,1]) #Se guardará el numero de coincidencias, carrera y Area
     
-print("\n")    
+print("\n\n")    
 definitiva.sort(reverse=True)
-for i in definitiva:
+for i in definitiva: 
     print(i)
+
+idk = definitiva[0][0]
+print(idk)
+verificar = definitiva[0][2]
+lista_grafo = []
+
+for i in range(len(definitiva)):
+    if  idk == definitiva[i][0]:
+        if len(lista_grafo) == 0:
+            aux = ['indef', definitiva[i][1]]
+            print(aux)
+            lista_grafo.append(aux)
+        elif verificar == definitiva[i][2]:
+            aux = ['indef', definitiva[i][1]]
+            print(aux)
+            lista_grafo.append(aux)
+        else:
+            print("espera")
+    else:
+        for k in range(len(lista_grafo)):
+            f = lista_grafo[k][1]
+            aux = [f,definitiva[i][1]]
+            print(aux)
+            lista_grafo.append(aux)
+       
+print(lista_grafo)     
+graph = CrearGrafo(lista_grafo)
+print("grafo normal:\n")
+imprimirDict(graph)
+minimo_grafo = CrearGrafo(mst('indef', graph))
+print("grafo minimo:\n")
+imprimirDict(minimo_grafo)
+
 
 print("\n\n")
 #ESTA PARTE ES APARTE, NOS PRUEBA QUE FUNCIONA LA FUNCIÓN PRIM
