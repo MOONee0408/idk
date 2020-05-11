@@ -75,17 +75,16 @@ CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArtVis', 'ExpEsc'},
            'lit':{'Ssoc', 'ExpOral','ExpEsc'}, 
            'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
 
-Alum={'Cfis': 55,'Mec': 54, 'Mat':66, 
-        'Cbiosa':47, 'Eco': 42, 'Ssoc': 68, 
-        'Pol':42 , 'Csoc': 50, 'Adm': 58, 'Org': 42, 
-        'ArtVis': 48, 'ExpMus': 66, 'ExpOral': 49,'ExpEsc': 72}
+#Alum={'Cfis': 55,'Mec': 54, 'Mat':66, 
+#        'Cbiosa':47, 'Eco': 42, 'Ssoc': 68, 
+#        'Pol':42 , 'Csoc': 50, 'Adm': 58, 'Org': 42, 
+#        'ArtVis': 48, 'ExpMus': 66, 'ExpOral': 49,'ExpEsc': 72}
 
 
 #PARA INGRESAR DATOS DEL ALUMNO:
 def AgregarAlumno():
     Alum = {}
     for interes in intereses:
-#        print(interes)
         n = int(input("Ingrese el puntaje para " + interes + ":\t" ))
         while (n < 0 or n > 100):
             n = int(input("¡Ingrese un número válido!\t"))
@@ -97,35 +96,18 @@ def imprimirDict(Dict):
         print("Clave:\t " + str(clave) + "\tValor:\t" + str(Dict[clave]))
 
 
-def auxi(shasha,num):
-    aux = [shasha, num]
-    return aux
-
-
-#def sera(pts, clave):
-#    if pts == clave:
-#            lista_grafo.append(aux('indef',clave))
-#    else:
-#        pts = pts -1
-#        for k in range(len(areaIV)):
-#            if areaIV[k][1] != clave:
-#                lista_grafo.append(aux(areaIV[k][1],clave))
-
-
-#Alum = AgregarAlumno()
+Alum = AgregarAlumno()
 #copia = Alum.copy()
 Alumno = Alum.copy()
 for clave in Alum:
     if Alum[clave] < 45:
         Alumno.pop(clave,None)
 
-
 n = len(Alumno) #print(n)
 
 lista_Dict = []
 for clave in Alumno:   
     lista_Dict.append([Alumno[clave], clave])
-
 lista_Dict.sort(reverse=True)
 #print("lista:"+ str(lista_Dict))
 
