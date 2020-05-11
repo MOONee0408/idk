@@ -102,54 +102,72 @@ for clave in Alumno:
 lista_Dict.sort(reverse=True) #Nos organiza la lista de manera descendente, ej. [[72, 'Ssoc],...,[47, 'Adm']]
 #print("lista:"+ str(lista_Dict))
 
-
-definitiva = [] #En esta lista se guardan las listas que se muestra en la linea 113
-#Este ciclo nos busca todas las listas para formar nuestro grafo
-for clave in CAreaI:
+areaI = []
+areaII = []
+areaIII = []
+areaIV = []
+definitiva = []
+for clave in TArea:
     guardado = []
-    print("\nCarrera:\t")
-    print(clave)
-    print("Intereses:")
-    print(CAreaI[clave])
-    for y in CAreaI[clave]:
+    for y in TArea[clave]:
         for i in range(len(lista_Dict)):
             if y == lista_Dict[i][1]:
-                print("Sí esta " + str(y) + " en: " +  str(clave))
                 guardado.append(y)
-    print(guardado)
     m = len(guardado)
-    print(m)
-    definitiva.append([m,clave,1]) #Se guardará el numero de coincidencias, carrera y Area
-    
+    if clave in CAreaI:
+        definitiva.append([m,1, clave])
+        areaI.append([m, clave])
+    elif clave in CAreaII:
+        definitiva.append([m,2, clave])
+        areaII.append([m, clave])
+    elif clave in CAreaIII:
+        definitiva.append([m,3, clave])
+        areaIII.append([m, clave])
+    elif clave in CAreaIV:
+        definitiva.append([m,4, clave])
+        areaIV.append([m, clave])
+        
 print("\n\n")    
 definitiva.sort(reverse=True)
 for i in definitiva: 
     print(i)
 
-idk = definitiva[0][0]
-print(idk)
-verificar = definitiva[0][2]
+maxpts = definitiva[0][0]
+print("Numero maximo de puntos:\t", maxpts)
 lista_grafo = []
+#lista_grafo.append(['indef',definitiva[0][2]])
 
+print("\n\nUltimo ... ")
+contadorAreas = 0
+pts = maxpts
+#anterior  = definitiva[0][2]
+anteriores = []
 for i in range(len(definitiva)):
-    if  idk == definitiva[i][0]:
-        if len(lista_grafo) == 0:
-            aux = ['indef', definitiva[i][1]]
-            print(aux)
-            lista_grafo.append(aux)
-        elif verificar == definitiva[i][2]:
-            aux = ['indef', definitiva[i][1]]
-            print(aux)
-            lista_grafo.append(aux)
+    if definitiva[i][0] == pts: 
+        
+        if len(anteriores) == 0:
+            lista_grafo.append(['indef',definitiva[i][2]])
+            anteriores.append(definitiva[i])
+        elif definitiva[i] not in anteriores and pts ==maxpts:
+            lista_grafo.append(['indef',definitiva[i][2]])
+            anteriores.append(definitiva[i])
+            for k in range(len(anteriores)): 
+                if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                    lista_grafo.append([anteriores[k][2],definitiva[i][2]])       
         else:
-            print("espera")
+            lista_grafo.append(['indef',definitiva[i][2]])
+            anteriores.append(definitiva[i])
+            for k in range(len(anteriores)): 
+                if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                    lista_grafo.append([anteriores[k][2],definitiva[i][2]])
     else:
-        for k in range(len(lista_grafo)):
-            f = lista_grafo[k][1]
-            aux = [f,definitiva[i][1]]
-            print(aux)
-            lista_grafo.append(aux)
-       
+        pts = pts -1
+        anteriores.append(definitiva[i])
+        for k in range(len(anteriores)): 
+            if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                lista_grafo.append([anteriores[k][2],definitiva[i][2]])
+
+           
 print(lista_grafo)     
 graph = CrearGrafo(lista_grafo)
 print("grafo normal:\n")
@@ -157,7 +175,6 @@ imprimirDict(graph)
 minimo_grafo = CrearGrafo(mst('indef', graph))
 print("grafo minimo:\n")
 imprimirDict(minimo_grafo)
-
 
 print("\n\n")
 #ESTA PARTE ES APARTE, NOS PRUEBA QUE FUNCIONA LA FUNCIÓN PRIM
