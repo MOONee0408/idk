@@ -30,55 +30,100 @@ def mst(inicio, grafo):
     return aristas
 
 
-intereses = ['Cfis','Mec', 'Mat', 
-             'Cbiosa', 'Eco', 'Ssoc', 
-             'Pol', 'Csoc', 'Adm', 'Org', 
-             'ArtVis', 'ExpMus', 'ExpOral','ExpEsc']
+intereses = ['ciencias fisicas','mecanico', 'matematicas', 
+             'ciencias biologicas', 'ecologia', 'servicio social', 
+             'politico', 'ciencias sociales', 'administrativo', 'organizacional', 
+             'artistico', 'expresion musical', 'expresion oral','expresion escrita']
 carreras = [['arquitectura'], ['fisica'], ['ingenieria'], ['matematicas'], 
             ['biologia'], ['medicina'], ['psicologia'],['quimica'],
             ['administracion'],['comunicacion'],['derecho'], ['trabajo social'],
             ['diseño grafico'],['historia'],['literatura'],['musica']]
 
 
-TArea={'arq': ['Mec', 'Mat', 'Org', 'ArtVis'], 
-          'fis': ['Cfis','Mec', 'Mat'], 
-          'ing':['Cfis','Mec', 'Mat'], 
-          'mat':['Cfis', 'Mat', 'Org'],
-          'bio': {'Cfis', 'Cbiosa', 'Eco', 'Org'}, 
-           'med': {'Cfis', 'Mat', 'Cbiosa', 'Ssoc'}, 
-           'psi':{'Cbiosa','Ssoc', 'Csoc', 'Org', 'ExpOral'}, 
-           'quim':{'Mec', 'Mat', 'Cbiosa', 'Eco'},
-           'adm': {'Mat', 'Adm', 'Org', }, 
-            'com': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'},
-            'der':{'Ssoc', 'Pol', 'Csoc',  'Org', 'ExpOral','ExpEsc'}, 
-            'trabsoc':{'Eco', 'Ssoc', 'Csoc',  'Org', 'ExpOral','ExpEsc'},
-            'disgraf': {'Pol', 'Csoc', 'ArtVis', 'ExpEsc'}, 
-           'hist': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'}, 
-           'lit':{'Ssoc', 'ExpOral','ExpEsc'}, 
-           'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
+TArea={'arquitectura': ['mecanico', 'matematicas', 'organizacional', 'artistico'], 
+       'fisica': ['ciencias fisicas','mecanico', 'matematicas'], 
+       'ingenieria':['ciencias fisicas','mecanico', 'matematicas'], 
+       'matematicas':['ciencias fisicas', 'matematicas', 'organizacional'],
+       'biologia': ['ciencias fisicas', 'ciencias biologicas', 'ecologia', 'organizacional'], 
+       'medicina': ['ciencias fisicas', 'matematicas', 'ciencias biologicas', 'servicio social'], 
+       'psicologia':['ciencias biologicas','servicio social', 'ciencias sociales', 'organizacional', 'expresion oral'], 
+       'quimica':['mecanico', 'matematicas', 'ciencias biologicas', 'ecologia'],
+       'administracion': ['matematicas', 'administrativo', 'organizacional' ], 
+       'comunicacion': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'],
+       'derecho':['servicio social', 'politico', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'], 
+       'trabajo social':['ecologia', 'servicio social', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'],
+       'diseño grafico': ['politico', 'ciencias sociales', 'artistico', 'expresion escrita'], 
+       'historia': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'], 
+       'literatura':['servicio social', 'expresion oral','expresion escrita'], 
+       'musica':['expresion musical', 'expresion oral','expresion escrita']}
 
 
-CAreaI = {'arq': ['Mec', 'Mat', 'Org', 'ArtVis'], 
-          'fis': ['Cfis','Mec', 'Mat'], 
-          'ing':['Cfis','Mec', 'Mat'], 
-          'mat':['Cfis', 'Mat', 'Org']}
-CAreaII = {'bio': {'Cfis', 'Cbiosa', 'Eco', 'Org'}, 
-           'med': {'Cfis', 'Mat', 'Cbiosa', 'Ssoc'}, 
-           'psi':{'Cbiosa','Ssoc', 'Csoc', 'Org', 'ExpOral'}, 
-           'quim':{'Mec', 'Mat', 'Cbiosa', 'Eco'}}
-CAreaIII = {'adm': {'Mat', 'Adm', 'Org', }, 
-            'com': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'},
-            'der':{'Ssoc', 'Pol', 'Csoc',  'Org', 'ExpOral','ExpEsc'}, 
-            'trabsoc':{'Eco', 'Ssoc', 'Csoc',  'Org', 'ExpOral','ExpEsc'}}
-CAreaIV = {'disgraf': {'Pol', 'Csoc', 'ArtVis', 'ExpEsc'}, 
-           'hist': {'Ssoc', 'Pol', 'Csoc', 'ExpOral','ExpEsc'}, 
-           'lit':{'Ssoc', 'ExpOral','ExpEsc'}, 
-           'mus':{'ExpMus', 'ExpOral','ExpEsc'}}
+CAreaI = {'arquitectura': ['mecanico', 'matematicas', 'organizacional', 'artistico'], 
+          'fisica': ['ciencias fisicas','mecanico', 'matematicas'], 
+          'ingenieria':['ciencias fisicas','mecanico', 'matematicas'], 
+          'matematicas':['ciencias fisicas', 'matematicas', 'organizacional']}
+CAreaII = {'biologia': ['ciencias fisicas', 'ciencias biologicas', 'ecologia', 'organizacional'], 
+           'medicina': ['ciencias fisicas', 'matematicas', 'ciencias biologicas', 'servicio social'], 
+           'psicologia':['ciencias biologicas','servicio social', 'ciencias sociales', 'organizacional', 'expresion oral'], 
+           'quimica':['mecanico', 'matematicas', 'ciencias biologicas', 'ecologia']}
+CAreaIII = {'administracion': ['matematicas', 'administrativo', 'organizacional' ], 
+            'comunicacion': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'],
+            'derecho':['servicio social', 'politico', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'], 
+            'trabajo social':['ecologia', 'servicio social', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita']}
+CAreaIV = {'diseño grafico': ['politico', 'ciencias sociales', 'artistico', 'expresion escrita'], 
+           'historia': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'], 
+           'literatura':['servicio social', 'expresion oral','expresion escrita'], 
+           'musica':['expresion musical', 'expresion oral','expresion escrita']}
 
-#Alum={'Cfis': 55,'Mec': 54, 'Mat':66, 
-#        'Cbiosa':47, 'Eco': 42, 'Ssoc': 68, 
-#        'Pol':42 , 'Csoc': 50, 'Adm': 58, 'Org': 42, 
-#        'ArtVis': 48, 'ExpMus': 66, 'ExpOral': 49,'ExpEsc': 72}
+intereses = ['ciencias fisicas','mecanico', 'matematicas', 
+             'ciencias biologicas', 'ecologia', 'servicio social', 
+             'politico', 'ciencias sociales', 'administrativo', 'organizacional', 
+             'artistico', 'expresion musical', 'expresion oral','expresion escrita']
+carreras = [['arquitectura'], ['fisica'], ['ingenieria'], ['matematicas'], 
+            ['biologia'], ['medicina'], ['psicologia'],['quimica'],
+            ['administracion'],['comunicacion'],['derecho'], ['trabajo social'],
+            ['diseño grafico'],['historia'],['literatura'],['musica']]
+
+
+TArea={'arquitectura': ['mecanico', 'matematicas', 'organizacional', 'artistico'], 
+       'fisica': ['ciencias fisicas','mecanico', 'matematicas'], 
+       'ingenieria':['ciencias fisicas','mecanico', 'matematicas'], 
+       'matematicas':['ciencias fisicas', 'matematicas', 'organizacional'],
+       'biologia': ['ciencias fisicas', 'ciencias biologicas', 'ecologia', 'organizacional'], 
+       'medicina': ['ciencias fisicas', 'matematicas', 'ciencias biologicas', 'servicio social'], 
+       'psicologia':['ciencias biologicas','servicio social', 'ciencias sociales', 'organizacional', 'expresion oral'], 
+       'quimica':['mecanico', 'matematicas', 'ciencias biologicas', 'ecologia'],
+       'administracion': ['matematicas', 'administrativo', 'organizacional' ], 
+       'comunicacion': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'],
+       'derecho':['servicio social', 'politico', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'], 
+       'trabajo social':['ecologia', 'servicio social', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'],
+       'diseño grafico': ['politico', 'ciencias sociales', 'artistico', 'expresion escrita'], 
+       'historia': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'], 
+       'literatura':['servicio social', 'expresion oral','expresion escrita'], 
+       'musica':['expresion musical', 'expresion oral','expresion escrita']}
+
+
+CAreaI = {'arquitectura': ['mecanico', 'matematicas', 'organizacional', 'artistico'], 
+          'fisica': ['ciencias fisicas','mecanico', 'matematicas'], 
+          'ingenieria':['ciencias fisicas','mecanico', 'matematicas'], 
+          'matematicas':['ciencias fisicas', 'matematicas', 'organizacional']}
+CAreaII = {'biologia': ['ciencias fisicas', 'ciencias biologicas', 'ecologia', 'organizacional'], 
+           'medicina': ['ciencias fisicas', 'matematicas', 'ciencias biologicas', 'servicio social'], 
+           'psicologia':['ciencias biologicas','servicio social', 'ciencias sociales', 'organizacional', 'expresion oral'], 
+           'quimica':['mecanico', 'matematicas', 'ciencias biologicas', 'ecologia']}
+CAreaIII = {'administracion': ['matematicas', 'administrativo', 'organizacional' ], 
+            'comunicacion': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'],
+            'derecho':['servicio social', 'politico', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita'], 
+            'trabajo social':['ecologia', 'servicio social', 'ciencias sociales',  'organizacional' 'expresion oral','expresion escrita']}
+CAreaIV = {'diseño grafico': ['politico', 'ciencias sociales', 'artistico', 'expresion escrita'], 
+           'historia': ['servicio social', 'politico', 'ciencias sociales', 'expresion oral','expresion escrita'], 
+           'literatura':['servicio social', 'expresion oral','expresion escrita'], 
+           'musica':['expresion musical', 'expresion oral','expresion escrita']}
+
+#Alum={'ciencias fisicas': 55,'mecanico': 54, 'matematicas':66, 
+#        'ciencias biologicas':47, 'ecologia': 42, 'servicio social': 36, 
+#        'politico':42 , 'ciencias sociales': 50, 'administrativo': 58, 'organizacional': 42, 
+#        'artistico': 48, 'expresion musical': 66, 'expresion oral': 49,'expresion escrita': 72}
 
 
 #PARA INGRESAR DATOS DEL ALUMNO:
