@@ -126,7 +126,6 @@ CAreaIV = {'diseño grafico': ['politico', 'ciencias sociales', 'artistico', 'ex
 #        'artistico': 48, 'expresion musical': 66, 'expresion oral': 49,'expresion escrita': 72}
 
 
-#PARA INGRESAR DATOS DEL ALUMNO:
 def AgregarAlumno():
     Alum = {}
     for interes in intereses:
@@ -140,105 +139,118 @@ def imprimirDict(Dict):
     for clave in Dict:
         print("Clave:\t " + str(clave) + "\tValor:\t" + str(Dict[clave]))
 
+def main():
+    #Alum = AgregarAlumno()
+    Alumno = Alum.copy()
+    for clave in Alum:
+        if Alum[clave] < 45:
+            Alumno.pop(clave,None)
+    
+    #n = len(Alumno) #print(n)
+    lista_Dict = []
+    for clave in Alumno:   
+        lista_Dict.append([Alumno[clave], clave])
+    
+    lista_Dict.sort(reverse=True)
+    #print("lista:"+ str(lista_Dict))
+    
+    definitiva = []
+ 
+    for clave in TArea:
+        cont = 0 #Contador auxiliar que nos dice cuantas aptitudes son iguales a las de la carrera
+        for y in TArea[clave]:
+            for i in range(len(lista_Dict)):
+                if y == lista_Dict[i][1]: #Verifica que sean iguales cada uno de las aptitudes del alumno con las requeridas en la carrera
+                    cont = cont + 1 
 
-Alum = AgregarAlumno()
-#copia = Alum.copy()
-Alumno = Alum.copy()
-for clave in Alum:
-    if Alum[clave] < 45:
-        Alumno.pop(clave,None)
-
-n = len(Alumno) #print(n)
-
-lista_Dict = []
-for clave in Alumno:   
-    lista_Dict.append([Alumno[clave], clave])
-lista_Dict.sort(reverse=True)
-#print("lista:"+ str(lista_Dict))
-
-areaI = []
-areaII = []
-areaIII = []
-areaIV = []
-definitiva = []
-for clave in TArea:
-    guardado = []
-    for y in TArea[clave]:
-        for i in range(len(lista_Dict)):
-            if y == lista_Dict[i][1]:
-                guardado.append(y)
-    m = len(guardado)
-    if clave in CAreaI:
-        definitiva.append([m,1, clave])
-        areaI.append([m, clave])
-    elif clave in CAreaII:
-        definitiva.append([m,2, clave])
-        areaII.append([m, clave])
-    elif clave in CAreaIII:
-        definitiva.append([m,3, clave])
-        areaIII.append([m, clave])
-    elif clave in CAreaIV:
-        definitiva.append([m,4, clave])
-        areaIV.append([m, clave])
-
-print("\n\n")    
-definitiva.sort(reverse=True)
-for i in definitiva: 
-    print(i)
-
-maxpts = definitiva[0][0]
-print("Numero maximo de puntos:\t", maxpts)
-
-lista_grafo = []
-pts = maxpts
-paso= False
-areaS = []
-anteriores = []
-for i in range(len(definitiva)):
-    if definitiva[i][0] == pts: 
-        
-        if len(anteriores) == 0:
-            lista_grafo.append(['indef',definitiva[i][2]])
-            anteriores.append(definitiva[i])
-            c = 1
-            areaS.append(definitiva[i][1])
-        elif definitiva[i] not in anteriores and pts ==maxpts:
-            lista_grafo.append(['indef',definitiva[i][2]])
-            anteriores.append(definitiva[i])
-            c = c +1
-            areaS.append(definitiva[i][1])
-            for k in range(len(anteriores)): 
-                if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
-                    lista_grafo.append([anteriores[k][2],definitiva[i][2]])
+        if clave in CAreaI:
+            definitiva.append([cont,1, clave]) 
+        elif clave in CAreaII:
+            definitiva.append([cont,2, clave])
+        elif clave in CAreaIII:
+            definitiva.append([cont,3, clave])
+        elif clave in CAreaIV:
+            definitiva.append([cont,4, clave])
+    
+    print("\n\n")    
+    definitiva.sort(reverse=True)
+#    for i in definitiva: 
+#        print(i)
+    maxpts = definitiva[0][0]
+    #print("Numero maximo de puntos:\t", maxpts)
+    lista_grafo = []
+    pts = maxpts
+    paso= False
+    areaS = []
+    anteriores = []
+    for i in range(len(definitiva)):
+        if definitiva[i][0] == pts: 
+            
+            if len(anteriores) == 0:
+                lista_grafo.append(['indef',definitiva[i][2]])
+                anteriores.append(definitiva[i])
+                c = 1
+                areaS.append(definitiva[i][1])
+            elif definitiva[i] not in anteriores and pts ==maxpts:
+                lista_grafo.append(['indef',definitiva[i][2]])
+                anteriores.append(definitiva[i])
+                c = c +1
+                areaS.append(definitiva[i][1])
+                for k in range(len(anteriores)): 
+                    if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                        lista_grafo.append([anteriores[k][2],definitiva[i][2]])
+                        
+            elif pts < maxpts and definitiva[i][1] not in areaS and paso ==False:
+                lista_grafo.append(['indef',definitiva[i][2]])
+                c = c + 1
+                anteriores.append(definitiva[i])
+                for k in range(len(anteriores)): 
+                    if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                        lista_grafo.append([anteriores[k][2],definitiva[i][2]])
+                if definitiva[i+1][0] != pts:
+                    paso = True  
+            else:
+                anteriores.append(definitiva[i])
+                for k in range(len(anteriores)): 
                     
-        elif pts < maxpts and definitiva[i][1] not in areaS and paso ==False:
-            lista_grafo.append(['indef',definitiva[i][2]])
-            c = c + 1
-            anteriores.append(definitiva[i])
-            for k in range(len(anteriores)): 
-                if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
-                    lista_grafo.append([anteriores[k][2],definitiva[i][2]])
-            if definitiva[i+1][0] != pts:
-                paso = True  
+                    if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
+                        lista_grafo.append([anteriores[k][2],definitiva[i][2]])
         else:
+            pts = pts -1
             anteriores.append(definitiva[i])
             for k in range(len(anteriores)): 
-                
                 if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
                     lista_grafo.append([anteriores[k][2],definitiva[i][2]])
-    else:
-        pts = pts -1
-        anteriores.append(definitiva[i])
-        for k in range(len(anteriores)): 
-            if anteriores[k][1] == definitiva[i][1] and anteriores[k][2] != definitiva[i][2]:
-                lista_grafo.append([anteriores[k][2],definitiva[i][2]])
+    #
+    #print("\n\nAsociaciones")
+    #for i in lista_grafo: 
+    #    print("\n",i)     
+    graph = CrearGrafo(lista_grafo)
+    print("\n\ngrafo normal:\n")
+    imprimirDict(graph)
+    minimo_grafo = CrearGrafo(mst('indef', graph))
+    print("grafo minimo:\n")
+    imprimirDict(minimo_grafo)
 
-print("\n\nAsociaciones")
-for i in lista_grafo: 
-    print("\n",i)     
-graph = CrearGrafo(lista_grafo)
-print("\n\ngrafo normal:\n")
-imprimirDict(graph)
-minimo_grafo = CrearGrafo(mst('indef', graph))
-print("grafo minimo:\n")
-imprimirDict(minimo_grafo)
+
+print("\t\t<--BIENVENIDO-->")
+
+print("<<Universidad Nacional Autonoma de México>>")
+print("Facultad de ingeniería")
+print("Ingenieria en Computación")
+print("Estructuras Discretas")
+print("Proyecto final")
+print("Integrantes:") #Datos del programa
+bandera=False
+while bandera==False:
+    print("\n Menu:\n[1]Ejecutar \n[2]Salir\n")
+    try:
+        opcion=int(input("Selecciona una opcion:\n"))
+        bandera=True
+    except:
+        print("¡Opcion no valida! ")
+    if (opcion == 1):
+        main()
+    elif (opcion == 2):
+        break
+    bandera=False
