@@ -126,7 +126,7 @@ def main():
                     cont = cont + 1 
                     break
         if clave in CAreaI:                           #                                  [coincidencias,    Area,   interes]
-            definitiva.append([cont,1, clave])#Lo que se comento en la linea 119 EJEMPLO [3,                  4 ,  'musica']
+            definitiva.append([cont,1, clave])#Lo que se comento en la linea 139 EJEMPLO [3,                  4 ,  'musica']
         elif clave in CAreaII:
             definitiva.append([cont,2, clave])
         elif clave in CAreaIII:
@@ -135,59 +135,56 @@ def main():
             definitiva.append([cont,4, clave])
     
     print("\n\n")    
-    definitiva.sort(reverse=True) #REVERSE, lo mismo que linea 116, es para ordenar de mayor a menor
-#    for i in definitiva: 
-#        print(i)
+    definitiva.sort(reverse=True) #REVERSE, lo mismo que linea 136, es para ordenar de mayor a menor
+    
     maxpts = definitiva[0][0] # Numero maximo de puntos(COINCIDENCIAS)
     #print("Numero maximo de puntos:\t", maxpts)
     lista_grafo = [] #GUARDA LAS RELACIONES, estas serán necesarias para la 
     pts = maxpts #esta variable guarda los puntos, es auxiliar para poder iterar 
     paso= False #variable auxiliar que nos ayuda a identificar si un elemento de la misma area (ya guardada) tiene menos puntos
-    #Revisar Linea 163 y 168 
-    areaS = [] #Nos ayuda para poder ver si falta algun elemento de alguna area, revisar linea 163
+    #Revisar Linea 163 y 168
+    areaS = [] #Nos ayuda para poder ver si falta algun elemento de alguna area, revisar linea 183
     anteriores = [] #Guarda los elementos que ya se crearon sus relaciones.
-    for i in range(len(definitiva)):
-        if definitiva[i][0] == pts: 
+    for i in range(len(definitiva)): 
+        if definitiva[i][0] == pts: #Si las coincidencias es igual al numero actual de puntos
             
-            if len(anteriores) == 0:
+            if len(anteriores) == 0: #Verifica si esta vacia 
                 lista_grafo.append(['indef',definitiva[i][2]])
                 anteriores.append(definitiva[i])
-                c = 1
-                areaS.append(definitiva[i][1])
-            elif definitiva[i] not in anteriores and pts ==maxpts:
+                areaS.append(definitiva[i][1])   
+                
+            elif definitiva[i] not in anteriores and pts ==maxpts: #Verifica que tenga los puntos maximos y que no este todavia guardado
                 lista_grafo.append(['indef',definitiva[i][2]])
                 anteriores.append(definitiva[i])
-                c = c +1
                 areaS.append(definitiva[i][1])
-                idk(anteriores, lista_grafo, definitiva, i)
+                idk(anteriores, lista_grafo, definitiva, i) #linea 96 y 97: ¿HAY MÁS ELEMENTOS CON LOS CUALES RELACIONAR? Combina...
+        
+        #Los puntos deben ser menores al maximo, si todavia no se agrega alguno de su area y paso ... linea                 
             elif pts < maxpts and definitiva[i][1] not in areaS and paso ==False:
                 lista_grafo.append(['indef',definitiva[i][2]])
-                c = c + 1
                 anteriores.append(definitiva[i])
                 idk(anteriores, lista_grafo, definitiva, i)
-                if definitiva[i+1][0] != pts:
+                #Cuando ya se agregaron todos los que eran de un area que faltaba pero el numero de coincidencias varia
+                if definitiva[i+1][0] != pts: #Entonces entra aqui y al ser diferente cambia su valor y no volverá a entrar aqui
                     paso = True  
-            else:
+            else: #Cualquier otro caso simplemente se relacionara con los datos  (nodos) ya existentes
                 anteriores.append(definitiva[i])
                 idk(anteriores, lista_grafo, definitiva, i)
         else:
-            pts = pts -1
-            anteriores.append(definitiva[i])
-            idk(anteriores, lista_grafo, definitiva, i)
-    #
-    #print("\n\nAsociaciones")
-    for i in lista_grafo: 
-        print("\n",i)     
-    graph = CrearGrafo(lista_grafo)
+            pts = pts -1 #Reduce el numero de puntos
+            anteriores.append(definitiva[i]) 
+            idk(anteriores, lista_grafo, definitiva, i) #Linea 170: se relacionara con los datos (nodos) ya existentes
+
+   
+    graph = CrearGrafo(lista_grafo) #Crea nuestro grafo a partir de las listas de relaciones existentes.
 #    print("\n\ngrafo normal:\n")
 #    imprimirDict(graph)
-    minimo_grafo = CrearGrafo(mst('indef', graph))
+    minimo_grafo = CrearGrafo(mst('indef', graph)) #Queremos que empiece desde un nodo principal definido como indefinido
     print("grafo minimo:\n")
-    imprimirDict(minimo_grafo)
+    imprimirDict(minimo_grafo) #Imprime nuestro arbol de expansión minima como un diccionario 
 
 
 print("\t\t<--BIENVENIDO-->")
-
 print("<<Universidad Nacional Autonoma de México>>")
 print("Facultad de ingeniería")
 print("Ingenieria en Computación")
@@ -207,18 +204,7 @@ while bandera==False:
     elif (opcion == 2):
         break
     bandera=False
-
-#
-#print("\n\n")       
-#grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
-#imprimirDict(grafo)
-#min_grafo = CrearGrafo(mst(0, grafo))
-#imprimirDict(min_grafo)
-##print(min_grafo)
-#
-#lista = [sorted(min_grafo[k]) for k in sorted(min_grafo)]
-##[[10], [6], [7, 11], [10, 11], [7, 9], [7, 12], [1, 8], [2, 4, 5], [6, 12], [4], [0, 3], [2, 3], [5, 8]]
-#print(lista)
-
-
-        
+    
+    
+    
+    
