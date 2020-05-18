@@ -126,15 +126,14 @@ def main():
                     cont = cont + 1 
                     break
         if clave in CAreaI:                           #                                  [coincidencias,    Area,   interes]
-            definitiva.append([cont,1, clave])#Lo que se comento en la linea 139 EJEMPLO [3,                  4 ,  'musica']
+            definitiva.append([cont,1, clave])#Lo que se comento en la linea 139 EJEMPLO [3,                  4 ,  'musica']
         elif clave in CAreaII:
             definitiva.append([cont,2, clave])
         elif clave in CAreaIII:
             definitiva.append([cont,3, clave])
         elif clave in CAreaIV:
             definitiva.append([cont,4, clave])
-    
-    print("\n\n")    
+       
     definitiva.sort(reverse=True) #REVERSE, lo mismo que linea 136, es para ordenar de mayor a menor
     
     maxpts = definitiva[0][0] # Numero maximo de puntos(COINCIDENCIAS)
@@ -180,20 +179,18 @@ def main():
 #    print("\n\ngrafo normal:\n")
 #    imprimirDict(graph)
     minimo_grafo = CrearGrafo(mst('indef', graph)) #Queremos que empiece desde un nodo principal definido como indefinido
-    print("grafo minimo:\n")
+    print("arbol de expansión minima:\n")
     imprimirDict(minimo_grafo) #Imprime nuestro arbol de expansión minima como un diccionario 
+    print("\n\nLa carreras mas aptas de cada una de las areas son:\n\n", str(minimo_grafo['indef']))
 
-
-print("\t\t<--BIENVENIDO-->")
-print("<<Universidad Nacional Autonoma de México>>")
-print("Facultad de ingeniería")
-print("Ingenieria en Computación")
-print("Estructuras Discretas")
-print("Proyecto final")
-print("Integrantes:") #Datos del programa
+ #Datos del programa
 bandera=False
 while bandera==False:
-    print("\n Menu:\n[1]Ejecutar \n[2]Salir\n")
+    print("\n\t\t    <--BIENVENIDO-->")
+    print("\t<<Universidad Nacional Autonoma de México>>\n\t\tFacultad de ingeniería\n\t      Ingenieria en Computación\n")
+    print("\t\tEstructuras Discretas\n\t\t    Proyecto final\n\t\t     Integrantes:\n")
+    print("\t      Barojas Onofre Diana Teresa\n\t      Cortés Hernández José César\n\t    Ortiz Camacho Jessica Elizabeth\n\n")
+    print("Menu:\n[1]Ejecutar \n[2]Salir\n")
     try:
         opcion=int(input("Selecciona una opcion:\n"))
         bandera=True
@@ -204,7 +201,15 @@ while bandera==False:
     elif (opcion == 2):
         break
     bandera=False
-    
-    
-    
-    
+
+#
+#print("\n\n")       
+#grafo = CrearGrafo([[10, 2], [7, 4], [11, 3], [1, 12], [6, 8], [10, 3], [4, 9], [5, 7], [8, 12], [2, 11], [1, 6], [0, 10], [7, 2], [12, 5]])
+#imprimirDict(grafo)
+#min_grafo = CrearGrafo(mst(0, grafo))
+#imprimirDict(min_grafo)
+##print(min_grafo)
+#
+#lista = [sorted(min_grafo[k]) for k in sorted(min_grafo)]
+##[[10], [6], [7, 11], [10, 11], [7, 9], [7, 12], [1, 8], [2, 4, 5], [6, 12], [4], [0, 3], [2, 3], [5, 8]]
+#print(lista)
